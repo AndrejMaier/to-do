@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+  background-color: #eef4fb;
+  font-family: 'Comfortaa', cursive;
+}
+
+header {
+	background-color: #2f80ed;
+	color: #fff;
+	padding: 24px 0 20px;
+}
+
+.container {
+	max-width: 1820px;
+  min-width: 1140px;
+	padding: 0 50px;
+	margin: 0 auto;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+.add-task {
+  width: 450px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 50px 0;
+  box-sizing: border-box;
+}
+
+.add-task h2 {
+  margin-top: 0;
+}
+
+.add-task__field {
+  width: 250px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  font-size: 14px;
+}
+
+.add-task__btn {
+  margin: 0 10px;
+  height: 40px;
+  width: 118px;
+  padding: 0 10px;
+  background-color: #2f80ed;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+}
+
+.tasks-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks {
+  box-sizing: border-box;
+}
+
+.tasks--backlog .tasks__title {
+	color: #6a6a6a;
+	background-color: #e3e3e3;
+}
+
+.tasks--in-process .tasks__title {
+	color: #2f80ed;
+	background-color: #d6e7ff;
+}
+
+.tasks--ready .tasks__title {
+	color: #65b670;
+	background-color: #d7f9e0;
+}
+
+.tasks--remove .tasks__title {
+	color: #c9666c;
+	background-color: #fbe3e3;
+}
+
+.tasks__title {
+	width: fit-content;
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.tasks__list {
+  list-style: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.tasks__item {
+	position: relative;
+  margin: 10px 0;
+  min-width: 250px;
+  background-color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 5px;
+	cursor: move;
+}
+
+.tasks__item p {
+	padding: 10px 10px 10px 20px;
+	margin: 0;
+}
+
+.tasks__item input {
+	margin: 10px 10px 10px 20px;
+	display: none;
+}
+
+.tasks__item-empty {
+	padding: 15px 19px;
+	color: #d0d0d0;
+	border: 1px dashed #d0d0d0;
+	background-color: transparent;
+}
+
+.btn--edit {
+	width: 24px;
+	height: 24px;
+	background-image: url(../../public/img/edit.svg);
+	padding: 0;
+	background-color: transparent;
+	position: relative;
+	margin-left: 8px;
+	right: 10px;
+	z-index: 2;
+	border: none;
+	opacity: 0;
+}
+
+.tasks__item:hover .btn--edit {
+	opacity: 1;
+}
+
+.tasks__item:hover .btn--edit:hover {
+	background-image: url(../../public/img/edit-active.svg);
+}
+
+.btn--remove {
+	background-color: #c9666c;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	width: 250px;
+	padding: 8px 10px 8px 20px;
+	font-weight: 100;
+	position: relative;
+	border-radius: 5px;
+	border: none;
+}
+
+.btn--remove:before {
+	content: '+';
+	position: absolute;
+	transform: rotate(45deg);
+	font-size: 32px;
+	padding: 0;
+	margin-right: 10px;
+	left: 85px;
+}
+
+.btn--remove:hover {
+	background-color: #d18d91;;
+}
+
+.btn--remove:active {
+	background-color: #a04b50;;
+}
+
+.selected {
+  opacity: 0.6;
+}
