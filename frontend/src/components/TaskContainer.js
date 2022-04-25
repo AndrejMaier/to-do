@@ -1,40 +1,66 @@
 import TaskList from "./TaskList";
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import axios from "axios";
 
 const TaskContainer = () => {
-
+	const [tasks, setTasks] = useState();
+	const [backlogArr, setBacklogArr] = useState();
+	const getData = async (url) => {
+		await axios(url).then(res => setTasks(res.data))
+	}
+	const giveTasksByStatus = (arr, status) => arr.filter(item => item.status === status);
+	
 	useEffect(() => {
-		const tasksContainer = document.querySelector('.tasks-container');
-		const tasksElements = tasksContainer.querySelectorAll('.tasks__item');
+		getData('http://localhost:5000/tasks');
+		setTimeout(() => {
+			setBacklogArr(giveTasksByStatus(tasks, 'backlog'));
+			console.log(backlogArr);
+		}, 1000)
+		
+	}, [])
+	useEffect(() => {
 
-		for(const task of tasksElements) {
-			task.draggable = true;
+		// Drag and Drop
+		const tasksLists = document.querySelectorAll('.tasks__list');
+		const tasksContainer = document.querySelector('.tasks-container');
+		let item;
+
+		tasksContainer.addEventListener("dragstart", (e) => {
+			e.target.classList.add('selected');
+			item = e.target;
+		}, false)
+
+		tasksContainer.addEventListener("dragend", (e) => {
+			e.target.classList.remove('selected');
+		}, false)
+
+		for(const tasksList of tasksLists) {
+			tasksList.addEventListener('dragover', (e) => {
+				e.preventDefault();
+				const activeElement = tasksList.querySelector('.selected');
+				const currentElement = e.target;
+				const isMoveable = activeElement !== currentElement && currentElement.classList.contains('tasks__item') && !currentElement.classList.contains('tasks__item-empty');
+				if (!isMoveable) {
+					return;
+				}
+				const nextElement = (currentElement === activeElement.nextElementSibling) ?currentElement.nextElementSibling : currentElement;
+				tasksList.insertBefore(activeElement, nextElement);
+			})
 		}
 
-		tasksContainer.addEventListener('dragstart', (e) => {
-			e.target.classList.add('selected');
-		})
-		tasksContainer.addEventListener('dragend', (e) => {
-			e.target.classList.remove('selected');
-		})
-		tasksContainer.addEventListener('dragover', (e) => {
+		tasksContainer.addEventListener("drop", (e) => {
 			e.preventDefault();
-			const activeElement = tasksContainer.querySelector('.selected');
-			const currentElement = e.target;
-			console.log(currentElement);
-			const isMoveable = activeElement !== currentElement && currentElement.classList.contains(`tasks__item`);
-			if (!isMoveable) {
-				return;
+			console.log(e.target);
+			if(e.target.className === "tasks__item tasks__item-empty") {
+				item.parentNode.removeChild(item);
+				e.target.after(item)
 			}
-			const nextElement = (currentElement === activeElement.nextElementSibling) ?
-      currentElement.nextElementSibling : currentElement;
-			tasksContainer.insertBefore(activeElement, nextElement);
 		})
 	}, [])
-
+	
   return(
     <section className="tasks-container">
-      <TaskList status={'backlog'} />
+      <TaskList status={'backlog'} array={backlogArr} />
       <TaskList status={'in-process'}/>
       <TaskList status={'ready'}/>
       <TaskList status={'remove'}/>

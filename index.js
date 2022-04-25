@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'; 
 import { Low, JSONFile } from 'lowdb';
 
 // database config
@@ -11,10 +12,14 @@ await db.read()
 const app = express();
 const PORT = 5000;
 
-
+app.use(cors());
 // server router
 app.get('/', (req, res) => {
 	res.send(`<h1>${db.data.posts[0]}</h1>`)
+})
+
+app.get('/tasks', (req, res) => {
+	res.send(db.data.tasks)
 })
 
 app.get('/404', (req, res) => {

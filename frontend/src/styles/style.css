@@ -65,6 +65,7 @@ h1 {
 .tasks-container {
   display: flex;
   justify-content: space-between;
+	gap: 25px;
 }
 
 .tasks {
@@ -163,7 +164,7 @@ h1 {
 	align-items: center;
 	justify-content: center;
 	font-size: 18px;
-	width: 250px;
+	width: 100%;
 	padding: 8px 10px 8px 20px;
 	font-weight: 100;
 	position: relative;

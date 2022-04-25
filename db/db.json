@@ -1,3 +1,29 @@
 {
-  "posts": [ "hello world" ]
+	"tasks": [
+		{
+			"id": 1,
+			"status": "backlog",
+			"textOfTask": "First task"
+		},
+		{
+			"id": 4,
+			"status": "backlog",
+			"textOfTask": "First task"
+		},
+		{
+			"id": 2,
+			"status": "in process",
+			"textOfTask": "Second task"
+		},
+		{
+			"id": 3,
+			"status": "ready",
+			"textOfTask": "Thirty task"
+		},
+		{
+			"id": 4,
+			"status": "remove",
+			"textOfTask": "Fourty task"
+		}
+	]
 }

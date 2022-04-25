@@ -1,6 +1,6 @@
 import Task from './Task';
 
-const TaskList = ({status}) => {
+const TaskList = ({status, array}) => {
 	let title = '';
 	switch(status) {
 		case 'backlog':
@@ -18,15 +18,23 @@ const TaskList = ({status}) => {
 		default:
 			break;
 	}
+
+	console.log(array)
 	return (
 		<section className={`tasks tasks--${status}`}>
       <h3 className="tasks__title">{title}</h3>
-			<ul className="tasks__list">
+			<ul className={"tasks__list"}>
+				{status === "backlog" &&
+					<li className="tasks__item tasks__item-empty">Create a new task or drag an old one</li>
+				}
 				{status === "in-process" &&
 					<li className="tasks__item tasks__item-empty">Drag the card</li>
 				}
 				{status === "ready" &&
 					<li className="tasks__item tasks__item-empty">Drag the card</li>
+				}
+				{status === "remove" &&
+					<li className="tasks__item tasks__item-empty">Drag the card to remove</li>
 				}
 				<Task value='First task'/>
 				<Task value='Second task'/>
