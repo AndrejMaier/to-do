@@ -1,6 +1,6 @@
 const Task = ({value}) => {
 	return (
-		<li className="tasks__item" draggable="true" onDragStart="event.dataTransfer.setData('text/plain',null)">
+		<li className="tasks__item" draggable="true" >
 			<p>{value}</p>
 			<button className="btn--edit"></button>
 		</li>
@@ -9,5 +9,6 @@ const Task = ({value}) => {
 
 
 //<input type="text" value={value} />
+//onDragStart="event.dataTransfer.setData('text/plain',null)"
 
 export default Task;

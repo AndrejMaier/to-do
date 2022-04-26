@@ -1,6 +1,6 @@
 import Task from './Task';
 
-const TaskList = ({status, array}) => {
+const TaskList = ({status, arr}) => {
 	let title = '';
 	switch(status) {
 		case 'backlog':
@@ -18,8 +18,6 @@ const TaskList = ({status, array}) => {
 		default:
 			break;
 	}
-
-	console.log(array)
 	return (
 		<section className={`tasks tasks--${status}`}>
       <h3 className="tasks__title">{title}</h3>
@@ -36,9 +34,7 @@ const TaskList = ({status, array}) => {
 				{status === "remove" &&
 					<li className="tasks__item tasks__item-empty">Drag the card to remove</li>
 				}
-				<Task value='First task'/>
-				<Task value='Second task'/>
-				<Task value='Thirty task'/>
+				{arr.map(task => <Task value={task.textOfTask} key={task.id} />)}
 			</ul>
 			{status === 'remove' &&
 				<button className="btn--remove">Clear</button>
@@ -47,4 +43,9 @@ const TaskList = ({status, array}) => {
 	)
 }
 
+{/* <Task value='First task'/>
+<Task value='Second task'/>
+<Task value='Thirty task'/> */}
+
 export default TaskList;
+

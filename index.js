@@ -13,6 +13,8 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors());
+app.use(express.urlencoded());
+
 // server router
 app.get('/', (req, res) => {
 	res.send(`<h1>${db.data.posts[0]}</h1>`)
@@ -22,8 +24,9 @@ app.get('/tasks', (req, res) => {
 	res.send(db.data.tasks)
 })
 
-app.get('/404', (req, res) => {
-	res.send('Page not found')
+app.post('/tasks', (req, res) => {
+  console.log(req.body);
+	res.end();
 })
 
 app.listen(PORT, () => {
